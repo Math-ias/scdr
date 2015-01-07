@@ -6,12 +6,26 @@ Simple Commandline Definition Receiver is a small python program that fetches de
 Use
 ---
 
-To use simply run `python dictionary.py WORD` in a terminal, use `python dictionary --help` to find out about all the options.
+To use simply run `python dictionary.py WORD` in a terminal, use `python dictionary --help` to find out how to use it from your command line.
+
+Currently the options are:
+
+`-h, --help` To see a help page.
+
+`-f FILE, --file=FILE` To use a file with words (every new line) to find definitions of.
+
+`-a, --alternating` To alternate the background colors of the definitions to make them more distinguishable.
+
+`-s, --sane` To keep the output sane, no alternating background colors
+
+`-b, --boring` To have the output boring with no color or bolding, this is mainly useful for piping output.
+
+`-o FILE, --output=FILE` To choose a location for a text file to output to. This will not have any colors or bolding since that is very messy (ANSI codes and everything)
 
 Installation
 ------------
 
-To install pull this project `git clone https://github.com/Math-ias/scdr.git` or however you like to do this, and edit the APIKEY file. Change it to being your [dictionaryapi.com](http://www.dictionaryapi.com/) API key. This key should be for the Merriam Webster's School Dictionary with Audio, you can see it [here](http://www.dictionaryapi.com/products/api-school-dictionary.htm). This program however might work with the other products on [dictionaryapi.com](http://www.dictionaryapi.com/).
+To install pull this project `git clone https://github.com/Math-ias/scdr.git` or however you like to do this, and edit the APIKEY file (create the APIKEY file in the directory if it doesn't exist). Change it to being your [dictionaryapi.com](http://www.dictionaryapi.com/) API key. This key should be for the Merriam Webster's School Dictionary with Audio, you can see it [here](http://www.dictionaryapi.com/products/api-school-dictionary.htm). This program however might work with the other products on [dictionaryapi.com](http://www.dictionaryapi.com/).
 
 TODO
 ----
