@@ -6,7 +6,8 @@ import re
 import colorama
 import spellingCorrector as corrector
 
-key = "MERRIAM WEBSTER DICTIONARY API KEY HERE"
+with open("APIKEY", "r") as apikeyfile:
+	key = apikeyfile.read().replace('\n', '')
 
 def parseWord(word):
 	req = urllib2.Request("http://www.dictionaryapi.com/api/v1/references/sd4/xml/%s?key=%s" % (word, key))

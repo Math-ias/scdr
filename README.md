@@ -11,11 +11,7 @@ To use simply run `python dictionary.py WORD` in a terminal, use `python diction
 Installation
 ------------
 
-To install pull this project `git clone https://github.com/Math-ias/scdr.git` or however you like to do this, and edit dictionary.py. In it look for the line that is:
-```python
-key = "MERRIAM WEBSTER DICTIONARY API KEY HERE"
-```
-Change it to being your [dictionaryapi.com](http://www.dictionaryapi.com/) API key within the quotes. This key should be for the Merriam Webster's School Dictionary with Audio, you can see it [here](http://www.dictionaryapi.com/products/api-school-dictionary.htm). This program however might work with the other products on [dictionaryapi.com](http://www.dictionaryapi.com/).
+To install pull this project `git clone https://github.com/Math-ias/scdr.git` or however you like to do this, and edit the APIKEY file. Change it to being your [dictionaryapi.com](http://www.dictionaryapi.com/) API key. This key should be for the Merriam Webster's School Dictionary with Audio, you can see it [here](http://www.dictionaryapi.com/products/api-school-dictionary.htm). This program however might work with the other products on [dictionaryapi.com](http://www.dictionaryapi.com/).
 
 TODO
 ----
