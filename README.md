@@ -6,7 +6,7 @@ Simple Commandline Definition Receiver is a small python program that fetches de
 Use
 ---
 
-To use simply run `python dictionary.py WORD` in a terminal, use `python dictionary --help` to find out how to use it from your command line.
+To use simply run `python dictionary.py WORD` in a terminal where word is the word you wish to have the definition of,, use `python dictionary --help` to find out how to use it from your command line.
 
 Currently the options are:
 
@@ -14,11 +14,9 @@ Currently the options are:
 
 `-f FILE, --file=FILE` To use a file with words (every new line) to find definitions of.
 
-`-a, --alternating` To alternate the background colors of the definitions to make them more distinguishable.
+`-a, --noalternating` To keep the output sane, no alternating background colors.
 
-`-s, --sane` To keep the output sane, no alternating background colors
-
-`-b, --boring` To have the output boring with no color or bolding, this is mainly useful for piping output.
+`-b, --noformat` To have the output boring with no color or bolding, this is mainly useful for piping output. This removes all formatting.
 
 `-o FILE, --output=FILE` To choose a location for a text file to output to. This will not have any colors or bolding since that is very messy (ANSI codes and everything)
 
