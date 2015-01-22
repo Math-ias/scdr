@@ -6,22 +6,34 @@ import re
 import colorama
 import spellingCorrector as corrector
 import sys
-
-with open("APIKEY", "r") as apikeyfile:
-	key = apikeyfile.read().replace('\n', '')
+try:
+	with open("APIKEY", 'r') as apikeyfile:
+		key = apikeyfile.read().replace('\n', '')
+except IOError as e:
+	print "Your APIKEY file does not exist! Please input your apikey for the merriam webster student dictionary below:"
+	key = input()
+	with open("APIKEY", 'w') as apikeyfile:
+		apikeyfile.write(key)
 
 def parseWord(word):
-	req = urllib2.Request("http://www.dictionaryapi.com/api/v1/references/sd4/xml/%s?key=%s" % (word, key))
-	merriamXML = urllib2.urlopen(req)	
+	try:
+		req = urllib2.Request("http://www.dictionaryapi.com/api/v1/references/sd4/xml/%s?key=%s" % (word, key))
+		merriamXML = urllib2.urlopen(req)
+	except URLError as urlerror:
+		print "There was an error in the URL. (%s)" % urlerror.reason	
+		return {"Could not retrieve definition due to an error."}
 
-	tree = ET.parse(merriamXML)	
-	root = tree.getroot()
-	defs = tree.findall(".//dt")
+	try:
+		tree = ET.parse(merriamXML)	
+		root = tree.getroot()
+		defs = tree.findall(".//dt")
+	except ParseError as pe: # NOTE: Due to bad documentation I could not find much about ParseError and if it's even thrown, it's in the source code of etree so I can check for it, but at this time it is unknown whether or not this is needed.
+		print "There was an error when parsing the files from merriam webster."
 	
 	# Merriam throws these disgusting extra tags in there. :(
 	# So we got to clean it up.	
 	
-	definitions = [re.sub(r'<[^>]*?>', '', ET.tostring(definition)) for definition in defs]	
+	definitions = [re.sub(r'<[^>]*?>', '', ET.tostring(definition)) for definition in defs] # Error handling here?	
 	# Shortened version of for def in defs: definitions.append(re.blahblahblah, stuff)
 
 	return definitions
@@ -42,14 +54,16 @@ if __name__ == "__main__":
 	words = {}
 
 	if options.output is not None:
-		sys.stdout = open(options.output, 'w')
+		sys.stdout = open(options.output, 'w') # Ugly hack to redirect output of the program! Eww!
 		options.color = False
 		options.alternating = False
 
 	if options.file is not None:
-		wordFile = open(options.file)
-		words = [line.rstrip() for line in wordFile.readlines()]	
-		wordFile.close()
+		try:
+			with open(options.file, 'r') as wordFile:
+				words = [line.rstrip() for line in wordFile.readlines()]
+		except IOError as e:
+			print "Unable to read from the given wordfile! Check that it exists and/or that there is permissions enough to access it."
 	else:
 		words = args
 
