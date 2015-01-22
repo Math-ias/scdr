@@ -46,11 +46,10 @@ if __name__ == "__main__":
 
 	optionParser = OptionParser()
 	optionParser.add_option("-f", "--file", action="store", help="Take words from a specified file.", metavar="FILE")
-	optionParser.add_option("-a", "--noalternating", dest="alternating", action="store_false", help="Keep the output sane, no alternating background colors.")
+	optionParser.add_option("-a", "--noalternating", dest="alternating", action="store_false", default=True, help="Keep the output sane, no alternating background colors.")
 	optionParser.add_option("-b", "--noformat", dest="color", action="store_false", default = True, help="Remove all formatting from the text, useful for piping.")
 	optionParser.add_option("-o", "--output", dest="output", action="store", help="Output all the definitions to a chosen file, the boring option is also set to true.", metavar="FILE")
 	(options, args) = optionParser.parse_args()
-	options.alternating = True
 	words = {}
 
 	if options.output is not None:
