@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET # Hey! ET!
 from optparse import OptionParser
-import urllib2
+import urllib
 import re
 import colorama
 import spellingCorrector as corrector
@@ -9,16 +9,15 @@ try:
 	with open("APIKEY", 'r') as apikeyfile:
 		key = apikeyfile.read().replace('\n', '')
 except IOError as e:
-	key = raw_input("Your APIKEY file does not exist! Please input your apikey for the merriam webster student dictionary below:")
+	key = input("Your APIKEY file does not exist! Please input your apikey for the merriam webster student dictionary below:")
 	with open("APIKEY", 'w') as apikeyfile:
 		apikeyfile.write(key)
 
 def parseWord(word):
 	try:
-		req = urllib2.Request("http://www.dictionaryapi.com/api/v1/references/sd4/xml/%s?key=%s" % (word, key))
-		merriamXML = urllib2.urlopen(req)
-	except urllib2.URLError as urlerror:
-		print "There was an error in the URL. (%s)" % urlerror.reason	
+		merriamXML = urllib.urlopen("http://www.dictionaryapi.com/api/v1/references/sd4/xml/{0}?key={1}".format(word, key))
+	except urllib.error.URLError as urlerror:
+		print("There was an error in the URL. {1}".format(urlerror.reason))	
 		return {"Could not retrieve definition due to an error."}
 
 	try:
@@ -26,7 +25,7 @@ def parseWord(word):
 		root = tree.getroot()
 		defs = tree.findall(".//dt")
 	except ET.ParseError as pe: # NOTE: Due to bad documentation I could not find much about ParseError and if it's even thrown, it's in the source code of etree so I can check for it, but at this time it is unknown whether or not this is needed.
-		print "There was an error when parsing the files from merriam webster."
+		print("There was an error when parsing the files from merriam webster.")
 		return {"Could not recieve definitions due to an error involving parsing."}
 	
 	# Merriam throws these disgusting extra tags in there. :(
@@ -61,7 +60,7 @@ if __name__ == "__main__":
 			with open(options.file, 'r') as wordFile:
 				words = [line.rstrip() for line in wordFile.readlines()]
 		except IOError as e:
-			print "Unable to read from the given wordfile! Check that it exists and/or that there is permissions enough to access it."
+			print("Unable to read from the given wordfile! Check that it exists and/or that there is permissions enough to access it.")
 	else:
 		words = args
 
@@ -70,12 +69,12 @@ if __name__ == "__main__":
 	for word in words:
 		cleanedDefinitions = parseWord(word)
 		if options.color == True:
-			print colorama.Fore.RED + colorama.Style.BRIGHT + word.upper()
+			print(colorama.Fore.RED + colorama.Style.BRIGHT + word.upper())
 		else:
-			print word.upper()
+			print(word.upper())
 		for num,definition in enumerate(cleanedDefinitions):
 			if num % 2 == 0 and options.alternating == True and options.color == True:
 				definition = colorama.Back.GREEN + definition
-			print ("%d -> %s " % (num+1, definition))
+			print ("{0} -> {1}".format(num+1, definition))
 	
 	sys.stdout = stdout

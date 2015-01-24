@@ -14,7 +14,7 @@ def train(features):
         model[f] += 1
     return model
 
-NWORDS = train(words(file('/usr/share/dict/words').read()))
+NWORDS = train(words(open('/usr/share/dict/words').read()))
 
 alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -50,8 +50,8 @@ def spelltest(tests, bias=None, verbose=False):
                 bad += 1
                 unknown += (target not in NWORDS)
                 if verbose:
-                    print 'correct(%r) => %r (%d); expected %r (%d)' % (
-                        wrong, w, NWORDS[w], target, NWORDS[target])
+                    print("correct({0}) => {1} ({2}); expected {3} ({4})".format(
+                        wrong, w, NWORDS[w], target, NWORDS[target]))
     return dict(bad=bad, n=n, bias=bias, pct=int(100. - 100.*bad/n), 
                 unknown=unknown, secs=int(time.clock()-start) )
 
@@ -247,8 +247,4 @@ tests2 = {'forbidden': 'forbiden', 'decisions': 'deciscions descisions',
 'together': 'togehter', 'profits': 'proffits'}
 
 if __name__ == '__main__':
-    print spelltest(tests1)
-
-
-    
-
+    print(spelltest(tests1))
