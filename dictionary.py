@@ -14,7 +14,7 @@ try:
 	with open("APIKEY", 'r') as apikeyfile:
 		key = apikeyfile.read().replace('\n', '')
 except IOError as e:
-	key = input("Your APIKEY file does not exist! Please input your apikey for the merriam webster student dictionary:")
+	key = input("Your APIKEY file does not exist! Please input your apikey for Meriam-Webster Inc.'s API:")
 	with open("APIKEY", 'w') as apikeyfile:
 		apikeyfile.write(key)
 
@@ -23,7 +23,7 @@ def parseWord(word):
 		tree = lxml.parse("http://www.dictionaryapi.com/api/v1/references/sd4/xml/{0}?key={1}".format(word, key))
 		defs = tree.findall(".//dt")
 	except lxml.ParseError as pe:
-		print("There was an error when parsing the files from merriam webster.")
+		print("There was an error when parsing the downloaded xml.")
 		return {"Could not recieve definitions due to an error involving parsing."}
 	
 	# Strip text of unparsed tags.
