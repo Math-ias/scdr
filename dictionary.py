@@ -43,7 +43,7 @@ if __name__ == "__main__":
 	argParser.add_argument("--noalternating", dest="alternating", action="store_false", default=True, help="Keep the output sane, no alternating background colors.")
 	argParser.add_argument("-n","--noformat", dest="color", action="store_false", default = True, help="Remove all formatting from the text, useful for piping.")
 	argParser.add_argument("-o","--output", dest="output", action="store", help="Output all the definitions to a chosen file, the boring option is also set to true.", metavar="FILE")
-	argParser.add_argument("words", nargs="+")
+	argParser.add_argument("words", nargs="*")
 	
 	args = argParser.parse_args()
 	
