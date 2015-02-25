@@ -1,4 +1,4 @@
-from lxml import etree as lxml
+import lxml.etree as etree
 import argparse
 import re
 import colorama
@@ -18,17 +18,36 @@ except IOError as e:
 	with open("APIKEY", 'w') as apikeyfile:
 		apikeyfile.write(key)
 
+class CollectorParser(object):
+	def __init__(self):
+		self.definition = ""
+		self.definitions = []
+
+	def start(self, tag, attrib):
+		if tag == "sx":
+			self.definition += "Synonym: "
+		elif tag == "dt":
+			self.definition = ""
+		elif tag == "un":
+			self.definition += "Usage:"
+	def end(self, tag):
+		if tag == "dt":
+			self.definitions.append(self.definition)
+	def data(self, data):
+		self.definition += data
+
+	def close(self):
+		return self.definitions	
+
 def parseWord(word):
 	try:
-		tree = lxml.parse("http://www.dictionaryapi.com/api/v1/references/sd4/xml/{0}?key={1}".format(word, key))
-		defs = tree.findall(".//dt")
-	except lxml.ParseError as pe:
+		parser = etree.XMLParser(target = CollectorParser())
+		definitions = etree.parse("http://www.dictionaryapi.com/api/v1/references/sd4/xml/{0}?key={1}".format(word, key), parser)
+	except etree.ParseError as pe:
 		print("There was an error when parsing the downloaded xml.")
-		return {"Could not recieve definitions due to an error involving parsing."}
+		return ["Could not recieve definitions due to an error involving parsing."]
 	
 	# Strip text of unparsed tags.
-
-	definitions = [defin.text for defin in defs]	
 
 	return definitions
 
