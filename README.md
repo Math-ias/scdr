@@ -36,6 +36,6 @@ Licensing requires me to put Merriam-Webster's Inc.'s logo here, so woopdeedoo!
 TODO
 ----
 
- - [ ] Better parsing (currently tags are stripped ungracefully)
+ - [x] Better parsing (currently tags are stripped ungracefully)
  - [x] Supporting most words
  - [ ] Windows support? (Uses /usr/share/dict/words which Windows does not have)
