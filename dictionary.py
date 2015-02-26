@@ -30,6 +30,8 @@ class CollectorParser(object):
 			self.definition = ""
 		elif tag == "un":
 			self.definition += "Usage:"
+		elif tag == "vi":
+			self.definition += "Example:"
 	def end(self, tag):
 		if tag == "dt":
 			self.definitions.append(self.definition)
