@@ -25,18 +25,19 @@ class CollectorParser(object):
 
 	def start(self, tag, attrib):
 		if tag == "sx":
-			self.definition += "Synonym: "
+			self.definition += "\nSynonym: "
 		elif tag == "dt":
 			self.definition = ""
 		elif tag == "un":
-			self.definition += "Usage:"
+			self.definition += "\nUsage: "
 		elif tag == "vi":
-			self.definition += "Example:"
+			self.definition += "\nExample: "
 	def end(self, tag):
 		if tag == "dt":
 			self.definitions.append(self.definition)
 	def data(self, data):
-		self.definition += data
+		self.definition += re.sub(':', '', data)
+		
 
 	def close(self):
 		return self.definitions	
@@ -94,7 +95,7 @@ if __name__ == "__main__":
 			print(word.upper())
 		for num,definition in enumerate(cleanedDefinitions):
 			if num % 2 == 0 and args.alternating == True and args.color == True:
-				definition = colorama.Back.GREEN + definition
+				definition = colorama.Fore.CYAN + definition
 			print ("{0} -> {1}".format(num+1, definition))
 	
 	sys.stdout = stdout
