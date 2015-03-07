@@ -34,7 +34,9 @@ class CollectorParser(object):
 			self.definition += "\nExample: "
 	def end(self, tag):
 		if tag == "dt":
-			self.definitions.append(self.definition)
+			reformattedDefinition = self.definition[:1].upper() + self.definition[1:] # Makes the first letter uppercase.
+			reformattedDefinition = reformattedDefinition.lstrip() # Strip newlines without text (for when a definition is just a synonym)
+			self.definitions.append(reformattedDefinition)
 	def data(self, data):
 		self.definition += re.sub(':', '', data)
 		
@@ -96,6 +98,6 @@ if __name__ == "__main__":
 		for num,definition in enumerate(cleanedDefinitions):
 			if num % 2 == 0 and args.alternating == True and args.color == True:
 				definition = colorama.Fore.CYAN + definition
-			print ("{0} -> {1}".format(num+1, definition))
+			print ("{0}. {1}".format(num+1, definition))
 	
 	sys.stdout = stdout
