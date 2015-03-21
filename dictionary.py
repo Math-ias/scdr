@@ -6,9 +6,9 @@ import spellingCorrector as corrector
 import sys
 
 try:
-input = raw_input
+    input = raw_input
 except NameError:
-pass # Just a very rough attempt at python2 & 3 compatability
+    pass # Just a very rough attempt at python2 & 3 compatability
 
 try:
     with open("APIKEY", 'r') as apikeyfile:
