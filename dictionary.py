@@ -78,7 +78,7 @@ if __name__ == "__main__":
     if args.file is not None:
         try:
             with open(args.file, 'r') as wordFile:
-                words = [line.rstrip() for line in wordFile.readlines()]
+                words = [corrector.correct(line.rstrip()) for line in wordFile.readlines()]
         except IOError as e:
             print("Unable to read from the given wordfile! Check that it exists and/or that there is permissions enough to access it.")
     else:
