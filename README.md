@@ -38,4 +38,4 @@ TODO
 
  - [x] Better parsing (currently tags are stripped ungracefully)
  - [x] Supporting most words
- - [ ] Windows support? (Uses /usr/share/dict/words which Windows does not have)
+ - [x] Windows support? (Uses /usr/share/dict/words which Windows does not have)

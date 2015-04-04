@@ -2,8 +2,8 @@ import lxml.etree as etree
 import argparse
 import re
 import colorama
-import spellingCorrector as corrector
 import sys
+import platform
 
 try:
     input = raw_input
@@ -78,12 +78,14 @@ if __name__ == "__main__":
     if args.file is not None:
         try:
             with open(args.file, 'r') as wordFile:
-                words = [corrector.correct(line.rstrip()) for line in wordFile.readlines()]
+                words = [line.rstrip() for line in wordFile.readlines()]
         except IOError as e:
             print("Unable to read from the given wordfile! Check that it exists and/or that there is permissions enough to access it.")
     else:
         words = args.words
 
+    if platform.system() != 'Windows':
+        import spellingCorrector as corrector
         words = [corrector.correct(word) for word in words]
 
     for word in words:
