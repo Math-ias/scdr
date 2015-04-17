@@ -23,9 +23,9 @@ Currently the options are:
 Installation
 ------------
 
-To install pull this project `git clone https://github.com/Math-ias/scdr.git` or however you like to do this, and edit the APIKEY file (create the APIKEY file in the directory if it doesn't exist). Change it to being your [Merriam-Webster Inc's API](http://www.dictionaryapi.com/) key. This key should be for the Merriam Webster's School Dictionary with Audio, you can see it [here](http://www.dictionaryapi.com/products/api-school-dictionary.htm). This program however might work with the other products on [dictionaryapi.com](http://www.dictionaryapi.com/).
+SCDR utilizes [Merriam Webster Incorporated's School Dictionary with Audio API](http://www.dictionaryapi.com/products/api-school-dictionary.htm), you can obtain an apikey for this at [dictionaryapi.com](http://www.dictionaryapi.com), this apikey is needed for the functioning of SCDR.
 
-Note in order to install you will need a few python packages, namely [lxml](http://lxml.de/), [colorama](https://pypi.python.org/pypi/colorama/0.3.3).
+To install SCDR pull this project `git clone https://github.com/Math-ias/scdr.git` or however you wish to do so, and run `python setup.py install` within the directory. This will install all the needed packages and install the python package.
 
 Merriam-Webster-Inc
 -------------------
