@@ -1,4 +1,4 @@
-scdr
+SCDR
 ====
 
 Simple Commandline Definition Receiver is a small python program that fetches definitions of words from the command line.
@@ -6,7 +6,7 @@ Simple Commandline Definition Receiver is a small python program that fetches de
 Use
 ---
 
-To use simply run `python dictionary.py WORD` in a terminal where word is the word you wish to have the definition of,, use `python dictionary --help` to find out how to use it from your command line.
+To use simply run `define WORD` in a terminal where `WORD` is the word you wish to have the definition of, use `define --help` to find out how to use it from your command line.
 
 Currently the options are:
 
