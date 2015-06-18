@@ -23,6 +23,7 @@ Installation
 SCDR utilizes [Merriam Webster Incorporated's School Dictionary with Audio API](http://www.dictionaryapi.com/products/api-school-dictionary.htm), you can obtain a key for this at [dictionaryapi.com](http://www.dictionaryapi.com), this key is needed for the functioning of SCDR.
 
 To install SCDR you can use either the:
+
  * [Bitbucket repository](https://bitbucket.org/mathias_kools/scdr), by running `pip install git+https://bitbucket.org/mathias_kools/scdr`
  * [GitHub repository](https://github.com/Math-ias/scdr.git), by running `pip install git+https://bitbucket.org/mathisa_kools/scdr`
 
