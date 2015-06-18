@@ -25,7 +25,7 @@ SCDR utilizes [Merriam Webster Incorporated's School Dictionary with Audio API](
 To install SCDR you can use either the:
 
  * [Bitbucket repository](https://bitbucket.org/mathias_kools/scdr), by running `pip install git+https://bitbucket.org/mathias_kools/scdr`
- * [GitHub repository](https://github.com/Math-ias/scdr.git), by running `pip install git+https://bitbucket.org/mathisa_kools/scdr`
+ * [GitHub repository](https://github.com/Math-ias/scdr.git), by running `pip install git+https://github.com/Math-ias/scdr`
 
 Both of the commands listed will install SCDR for you! Hooray :smile:. Both of the repositories are up to date so it doesn't matter which one you are using.
 
@@ -36,6 +36,7 @@ Hold on, give me a few minutes and I will be back with you about how to contribu
 Merriam-Webster-Inc
 -------------------
 Licensing requires me to put Merriam-Webster's Inc.'s logo here, so woopdeedoo!
+
 ![Merriam-Webster Inc.](merriam-webster-logo.png)
 
 TODO
