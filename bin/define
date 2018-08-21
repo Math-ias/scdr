@@ -11,7 +11,7 @@ from multiprocessing import Pool
 try:
     input = raw_input
 except NameError:
-    pass # Just a very rough attempt at python2 & 3 compatability
+    pass  # Just a very rough attempt at python2 & 3 compatability
 
 home = os.path.expanduser("~")
 
@@ -28,10 +28,14 @@ colorama.init(autoreset=True)
 
 argParser = argparse.ArgumentParser(description="A python program to fetch English definitions from the command line.")
 argParser.add_argument("-f", "--file", action="store", help="Take words from a specified file.", metavar="FILE")
-argParser.add_argument("--noalternating", dest="alternating", action="store_false", default=True, help="Keep the output sane, no alternating background colors.")
-argParser.add_argument("-n","--noformat", dest="color", action="store_false", default = True, help="Remove all formatting from the text, useful for piping.")
-argParser.add_argument("-o","--output", dest="output", action="store", help="Output all the definitions to a chosen file, the boring option is also set to true.", metavar="FILE")
-argParser.add_argument("-p","--processes", dest="processes", action="store", type=int, default=4, help="The number of worker python processes to use when fetching definitions.")
+argParser.add_argument("--noalternating", dest="alternating", action="store_false", default=True,
+                       help="Keep the output sane, no alternating background colors.")
+argParser.add_argument("-n", "--noformat", dest="color", action="store_false", default=True,
+                       help="Remove all formatting from the text, useful for piping.")
+argParser.add_argument("-o", "--output", dest="output", action="store", metavar="FILE",
+                       help="Output all the definitions to a chosen file, the boring option is also set to true.")
+argParser.add_argument("-p", "--processes", dest="processes", action="store", type=int, default=4,
+                       help="The number of worker python processes to use when fetching definitions.")
 argParser.add_argument("words", nargs="*")
 
 args = argParser.parse_args()
@@ -39,7 +43,7 @@ args = argParser.parse_args()
 words = {}
 
 if args.output is not None:
-    sys.stdout = open(args.output, 'w') # Ugly hack to redirect output of the program! Eww!
+    sys.stdout = open(args.output, 'w')  # Ugly hack to redirect output of the program! Eww!
     args.color = False
     args.alternating = False
 
@@ -48,29 +52,31 @@ if args.file is not None:
         with open(args.file, 'r') as wordFile:
             words = [line.rstrip() for line in wordFile.readlines()]
     except IOError as e:
-        print("Unable to read from the given wordfile! Check that it exists and/or that there is permissions enough to access it.")
+        print("Unable to read from the given wordfile! Check that it exists and/or that there is permissions enough" +
+              "to access it.")
 else:
     words = args.words
 
 if platform.system() != 'Windows':
-    import scdr.spellingCorrector as corrector
     words = [scdr.spellingCorrector.correct(word) for word in words]
+
 
 def define(word):
     return scdr.define.define(word, key)
 
+
 with Pool(processes=args.processes) as pool:
     definitionsarray = pool.map(define, words)
     for i, word in enumerate(words):
-       cleaneddefinitions = definitionsarray[i] 
-       if args.color == True:
-           print(colorama.Fore.RED + colorama.Style.BRIGHT + word.upper())
-       else:
-           print(word.upper())
-    
-       for num,definition in enumerate(cleaneddefinitions):
-           if num % 2 == 0 and args.alternating == True and args.color == True:
-               definition = colorama.Fore.CYAN + definition
-           print ("{0}. {1}".format(num+1, definition))
+        cleaneddefinitions = definitionsarray[i]
+        if args.color is True:
+            print(colorama.Fore.RED + colorama.Style.BRIGHT + word.upper())
+        else:
+            print(word.upper())
+
+        for num, definition in enumerate(cleaneddefinitions):
+            if num % 2 == 0 and args.alternating is True and args.color is True:
+                definition = colorama.Fore.CYAN + definition
+            print("{0}. {1}".format(num+1, definition))
 
 sys.stdout = stdout
