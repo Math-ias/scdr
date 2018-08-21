@@ -17,11 +17,11 @@ def sdist():
 
 @task
 def flake8():
-    sh('flake8 scdr/ --max-line-length=120 --max-complexity=10')
+    sh('flake8 bin/define scdr/ --max-line-length=120 --max-complexity=10')
 
 @task
 def pep8():
-    sh('pep8 scdr/')
+    sh('pep8 bin/define scdr/')
 
 @task
 @needs('flake8', 'pep8')
