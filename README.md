@@ -31,6 +31,8 @@ definitions of.
    program becomes faster with large lists of words when more processes are
    used because definition fetching is mostly net-bound.
 
+ * `-s --spellingcorrect` To enable spell correction provided by the
+   [autocorrect python package by phatpiglet](https://github.com/phatpiglet/autocorrect).
 
 Installation
 ------------

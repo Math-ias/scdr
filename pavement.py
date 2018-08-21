@@ -5,8 +5,8 @@ setup(
     name = 'scdr',
     packages=['scdr'],
     license='GNU GPL 2.0',
-    install_requires=['lxml', 'colorama'],
-    requires=['lxml', 'colorama'],
+    install_requires=['lxml', 'colorama', 'autocorrect'],
+    requires=['lxml', 'colorama', 'autocorrect'],
     scripts=['bin/define']
 )
 
