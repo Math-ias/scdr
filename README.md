@@ -16,14 +16,21 @@ Currently the options are:
  * `-f FILE, --file=FILE` To use a file with words (every new line) to find
 definitions of.
 
- * `-a, --noalternating` To keep the output sane, no alternating background colors.
+ * `-a, --noalternating` To keep the output sane, no alternating background
+ colors.
 
  * `-b, --noformat` To have the output boring with no color or bolding, this is
-mainly useful for piping output. This removes all formatting.
+   mainly useful for piping output. This removes all formatting.
 
- * `-o FILE, --output=FILE` To choose a location for a text file to output to. This
-will not have any colors or bolding since that is very messy (ANSI codes and
-everything)
+ * `-o FILE, --output=FILE` To choose a location for a text file to output to.
+   This will not have any colors or bolding since that is very messy (ANSI codes and
+   everything)
+
+ * `-p NUMBER, --processes=NUMBER` To choose a number of worker processes used
+   to download and parse definitions. The default is set to 4 processes. The
+   program becomes faster with large lists of words when more processes are
+   used because definition fetching is mostly net-bound.
+
 
 Installation
 ------------
@@ -54,8 +61,3 @@ Licensing requires me to put
 Merriam-Webster's Inc.'s logo here, so woopdeedoo!
 
 ![Merriam-Webster Inc.](merriam-webster-logo.png)
-
-TODO ----
- - [x] Better parsing (currently tags are stripped ungracefully)
- - [x] Supporting most words
- - [x] Windows support? (Uses /usr/share/dict/words which Windows does not have)
