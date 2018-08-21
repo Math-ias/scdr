@@ -21,7 +21,7 @@ def flake8():
 
 @task
 def pep8():
-    sh('pep8 bin/define scdr/')
+    sh('pycodestyle --max-line-length=120 bin/define scdr/')
 
 @task
 @needs('flake8', 'pep8')

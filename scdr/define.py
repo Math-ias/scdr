@@ -1,6 +1,7 @@
 import lxml.etree as etree
 import re
 
+
 class CollectorParser(object):
     def __init__(self):
         self.definition = ""
@@ -18,8 +19,10 @@ class CollectorParser(object):
 
     def end(self, tag):
             if tag == "dt":
-                reformattedDefinition = self.definition[:1].upper() + self.definition[1:] # Makes the first letter uppercase.
-                reformattedDefinition = reformattedDefinition.lstrip() # Strip newlines without text (for when a definition is just a synonym)
+                # Makes the first letter uppercase.
+                reformattedDefinition = self.definition[:1].upper() + self.definition[1:]
+                # Strip newlines without text (for when a definition is just a synonym)
+                reformattedDefinition = reformattedDefinition.lstrip()
                 self.definitions.append(reformattedDefinition)
 
     def data(self, data):
@@ -27,6 +30,7 @@ class CollectorParser(object):
 
     def close(self):
         return self.definitions
+
 
 def define(word, key):
     if type(key) is not str:
@@ -36,8 +40,9 @@ def define(word, key):
         raise ValueError("word '{0}' must be a string", word)
 
     try:
-        parser = etree.XMLParser(target = CollectorParser())
-        definitions = etree.parse("http://www.dictionaryapi.com/api/v1/references/sd4/xml/{0}?key={1}".format(word, key), parser)
+        parser = etree.XMLParser(target=CollectorParser())
+        definitions = etree.parse("http://www.dictionaryapi.com/" +
+                                  "api/v1/references/sd4/xml/{0}?key={1}".format(word, key), parser)
     except etree.ParseError as pe:
         raise Exception("Parsing error, probably due to invalid API key")
 
